@@ -65,10 +65,12 @@ public class MainActivity extends AppCompatActivity {
 
         database = new SearchDB(this);
         searchList = findViewById(R.id.searchList);
+
         list = new ArrayList<>();
         database.open();
         list = database.getSearches();
         database.close();
+
         setAdapter();
         searchList.setVisibility(View.GONE);
 
@@ -199,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
                 if (!recyclerView.canScrollVertically(1)) {
                     if (currentPage < totalPages){
                         currentPage++;
+                        showToast("Page" + currentPage);
                         APICall(searchQuery, Integer.toString(currentPage));
                     }
                     else
